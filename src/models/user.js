@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt=require('bcrypt');
+
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -30,6 +33,19 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
-  });
+  }
+);
+/// bcrypting and storing the password //
+const saltRound=10;
+
+// beforeCreate is used to manipulate the upcoming data before storing it into the db
+
+User.beforeCreate(async(user)=>{
+  const SALT =  await bcrypt.genSalt(saltRound);
+  const encryptedPassword=bcrypt.hashSync(user.password,SALT) //encrypted the pass
+  user.password=encryptedPassword; //change the user's pass with the encrytped one
+ 
+})
+
   return User;
 };

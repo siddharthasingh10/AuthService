@@ -4,6 +4,6 @@ const express=require('express')
 const router=express.Router();
 
 router.post('/signup',UserController.create)
-// router.delete('/users/:id',UserController.destroy)
+router.delete('/users/:id',UserController.destroy);
  
 module.exports=router;// remember always
