@@ -32,6 +32,5 @@ class UserRepository{
         }   
 
 }
-module.exports={
-    UserRepository
-}
+module.exports=UserRepository;
+//if you are passing as object then also fetch it as object wrna not a constructor error aayega 

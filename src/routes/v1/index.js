@@ -3,6 +3,7 @@ const UserController=require('../../controllers/user-controller'); //objects ko 
 const express=require('express')
 const router=express.Router();
 
-router.post('/users',UserController.create)
-router.delete('/users/:id',UserController.destroy)
+router.post('/signup',UserController.create)
+// router.delete('/users/:id',UserController.destroy)
+ 
 module.exports=router;// remember always

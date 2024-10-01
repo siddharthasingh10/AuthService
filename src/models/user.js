@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false,
       validate:{
         // basic validation provided by sequelize
-        len:[8,50]
+        len:[4,50]
       }
     }
 

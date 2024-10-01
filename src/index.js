@@ -8,8 +8,8 @@ const setupAndStartServer=()=>{
     const app=express(); 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
-    
-router.use('/api',ApiRoutes);
+
+app.use('/api',ApiRoutes); // never do router.use() here 
 
 
     app.listen(PORT,()=>{
