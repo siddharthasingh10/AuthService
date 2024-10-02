@@ -26,5 +26,15 @@ class UserService{
             throw {error}
         }
     }
+    async getUser(userId){
+        try{
+               const response= await this.userRepository.getByID(userId);
+                return response;
+        }
+        catch(error){
+            console.log('something wrong happend at service layer')
+            throw {error}
+        }
+    }
 }
 module.exports=UserService;

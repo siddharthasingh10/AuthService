@@ -30,6 +30,20 @@ class UserRepository{
             }
     
         }   
+        async getByID(userId){
+            try{
+                  const user=  await User.findByPk(userId,{
+    attributes:['email','id'] //only show the email and id {we do it to not showcase even the hashed password}
+                  })
+                    return user;
+    
+            }
+            catch(error){
+                console.log('somethinh happended wrong in User  repository level')
+                throw {error};
+            }
+    
+        }   
 
 }
 module.exports=UserRepository;
