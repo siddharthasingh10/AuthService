@@ -62,7 +62,7 @@ class UserService{
         }
 
     }
-    checkPassword(userInputPlainPassword,encrytpedPassword){
+    verifyPassword(userInputPlainPassword,encrytpedPassword){
 
         try{
             const response=bcrypt.compareSync(userInputPlainPassword,encrytpedPassword); 
@@ -73,6 +73,21 @@ class UserService{
             throw error;
             
         }
+
+    }
+    signIn(email,plainPassword){
+      //  1. fetch the user based on email entered
+        const user=this.userRepository.getByEmail(email);
+    // 2/ compare incoming plain password with stored encrypted pass
+    const matchPassword=this.verifyPassword(plainPassword,user.password);
+    if(!password){
+        console.log('incorrect pass')
+        throw new Error('incorrect pass')
+    }
+
+    // if password get matched
+    const newJwt=this.createToken({email:user.email,id:user.id})
+    return newJwt;
 
     }
 }
