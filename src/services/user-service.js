@@ -87,7 +87,7 @@ class UserService{
 
     // if password get matched
     const newJwt=this.createToken({email:user.email,id:user.id})
-    return newJwt;
+    return newJwt; 
 
     }
 }

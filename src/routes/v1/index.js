@@ -6,5 +6,6 @@ const router=express.Router();
 router.post('/signup',UserController.create)
 router.delete('/users/:id',UserController.destroy);
 router.get('/users/:id',UserController.getOne);
+router.post('/signin',UserController.signIn)
  
 module.exports=router;// remember always
