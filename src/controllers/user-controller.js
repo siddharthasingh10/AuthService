@@ -69,7 +69,7 @@ const signIn=async(req,res)=>{
  
     try{
         const {email,password}=req.body;
-        const response =await  userService.signIn(email,password);
+        const response =await   userService.signIn(email,password);
         return res.status(200).json({
             data: response,
             success: true,
