@@ -65,6 +65,7 @@ class UserService{
     verifyPassword(userInputPlainPassword,encrytpedPassword){
 
         try{
+            // console.log(userInputPlainPassword,encrytpedPassword);
             const response=bcrypt.compareSync(userInputPlainPassword,encrytpedPassword); 
             return response;
 
@@ -75,12 +76,13 @@ class UserService{
         }
 
     }
-    signIn(email,plainPassword){
+     async signIn(email,plainPassword){
       //  1. fetch the user based on email entered
-        const user=this.userRepository.getByEmail(email);
+        const user= await this.userRepository.getByEmail(email);
+        // console.log(user)
     // 2/ compare incoming plain password with stored encrypted pass
     const matchPassword=this.verifyPassword(plainPassword,user.password);
-    if(!password){
+    if(!matchPassword){
         console.log('incorrect pass')
         throw new Error('incorrect pass')
     }
