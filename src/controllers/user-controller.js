@@ -91,8 +91,14 @@ const isAuthenticated=async(req,res)=>{
     try{
         //get the token 
         const token =req.headers['x-access-token'];
-        const isVerified=userService.verifyToken(token);
-
+       
+        // now it could happen that after authentication deletes the acc then token  should not be valid
+const response =await userService.isAuthenticated(token)
+        res.status(200).json({
+            success:true,
+            error:{},data:response,
+            message:'user is authenticated and token is valid'
+        })
     }
     catch(error){
         console.log(error);
