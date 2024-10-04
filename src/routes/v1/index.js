@@ -14,5 +14,6 @@ router.post('/signin',
 );
 router.delete('/users/:id',UserController.destroy);
 router.get('/users/:id',UserController.getOne);
+router.get('/isAuthenticated',UserController.isAuthenticated)
  
 module.exports=router;// remember always

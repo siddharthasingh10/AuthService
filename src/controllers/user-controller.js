@@ -78,11 +78,34 @@ const signIn=async(req,res)=>{
         });
 
     }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: 'Not able to signin a user',
+            err: error
+        });
+    }
+}
+const isAuthenticated=async(req,res)=>{
+    try{
+        //get the token 
+        const token =req.headers['x-access-token'];
+        const isVerified=userService.verifyToken(token);
 
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: 'Not able to authenticate a user',
+            err: error
+        });
     }
 }
 module.exports = {
     create,
     destroy,
-    getOne,signIn
+    getOne,signIn,isAuthenticated
 };
