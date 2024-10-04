@@ -12,7 +12,7 @@ const setupAndStartServer=()=>{
 app.use('/api',ApiRoutes); // never do router.use() here 
      
     if(process.env.DB_SYNC){
-        db.sequelize.sequelize({alter:true})
+        db.sequelize.sync({alter:true});
     }
 
     app.listen(PORT,()=>{
