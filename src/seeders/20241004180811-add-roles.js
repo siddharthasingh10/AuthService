@@ -10,13 +10,19 @@ module.exports = {
      *  */
       await queryInterface.bulkInsert('Role', [
         {
-            name:"ADMIN"
+            name:"ADMIN",
+            createdAt:new Date(),
+            updatedAt:new Date()
         },
         {
-            name:"CUSTOMER"
+            name:"CUSTOMER",
+            createdAt:new Date(),
+            updatedAt:new Date()
         },
         {
-            name:"AIRLINE_BUSINESS"
+            name:"AIRLINE_BUSINESS",
+            createdAt:new Date(),
+            updatedAt:new Date()
         }
       ], {});
    
