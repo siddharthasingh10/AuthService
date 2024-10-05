@@ -1,13 +1,13 @@
 const UserService = require('../services/user-service');
 const userService = new UserService();
 
+
 const create = async (req, res) => {
     try {
-        
-        const data={
-            email:req.body.email,
-            password:req.body.password
-        }
+        const data = {
+            email: req.body.email,
+            password: req.body.password
+        };
         const user = await userService.createUser(data);
         return res.status(201).json({
             data: user,
@@ -17,11 +17,11 @@ const create = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+        return res.status(error.statusCode || 500).json({
             data: {},
             success: false,
-            message: 'Not able to create a user',
-            err: error
+            message: error.message,
+            err: error.explanation || 'Internal Server Error',
         });
     }
 };

@@ -3,6 +3,7 @@ const {JWT_KEY}=require('../config/serverconfig');
 const bcrypt=require('bcrypt')
 const UserRepository=require('../repository/user-repository');
 const { isAdmin } = require('../controllers/user-controller');
+const AppErrors = require('../utils/error-handlers');
 
 
 class UserService{
@@ -10,15 +11,21 @@ class UserService{
         this.userRepository=new UserRepository();
     }
 
-    async createUser(data){
-        try{
-            
-                const user= await this.userRepository.create(data);
-                return user;
-        }
-        catch(error){
-            console.log('something wrong happend at service user layer')
-            throw {error}
+    async createUser(data) {
+        try {
+            const user = await this.userRepository.create(data);
+            return user;
+        } catch (error) {
+            if (error.name === 'SequelizeValidationError') {
+                throw error;
+            }
+            console.log('Something went wrong at the service user layer');
+            throw new AppErrors(
+                'ServerError',
+                'Something went wrong in the service',
+                'Logical issue found in user creation',
+                StatusCodes.INTERNAL_SERVER_ERROR
+            );
         }
     }
     async deleteUser(userId){
