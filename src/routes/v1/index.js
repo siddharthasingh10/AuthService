@@ -14,6 +14,10 @@ router.post('/signin',
 );
 router.delete('/users/:id',UserController.destroy);
 router.get('/users/:id',UserController.getOne);
-router.get('/isAuthenticated',UserController.isAuthenticated)
+router.get('/isAuthenticated',UserController.isAuthenticated);
+
+router.get('/isAdmin',
+    AuthRequestValidators.validateIsAdminRequest,
+    UserController.isAdmin);
  
 module.exports=router;// remember always

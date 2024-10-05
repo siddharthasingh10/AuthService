@@ -2,6 +2,7 @@ const jwt=require('jsonwebtoken');
 const {JWT_KEY}=require('../config/serverconfig');
 const bcrypt=require('bcrypt')
 const UserRepository=require('../repository/user-repository');
+const { isAdmin } = require('../controllers/user-controller');
 
 
 class UserService{
@@ -108,6 +109,19 @@ class UserService{
     return newJwt; 
 
     }
+    isAdmin(userId){
+        try{
+            return this.userRepository.isAdmin(userId)
+            
+        }
+            catch(error){
+    
+                console.log('error in isadmin service layer')
+                throw {error};
+            }
+        }
 }
+
+
 
 module.exports=UserService;

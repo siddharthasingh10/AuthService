@@ -1,4 +1,5 @@
-const{User}=require('./../models/index');
+const{User,Role}=require('./../models/index');
+
 
 class UserRepository{
 
@@ -55,6 +56,21 @@ class UserRepository{
                 throw error;
             }
         } 
+        async isAdmin(userId){
+            try{
+                    const user=await User.findByPk(userId);
+                    const adminRole=await Role.findOne({
+                        where:{
+                            name:'ADMIN'
+                        }
+                    });
+                    return user.hasRoles(adminRole);  // if user is admin or not
+            }
+            catch(error){
+                console.log('something wrong in fetching user by email')
+                throw error;  
+            }
+        }
 
 }
 module.exports=UserRepository;

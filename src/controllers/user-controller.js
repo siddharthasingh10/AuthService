@@ -110,8 +110,32 @@ const response =await userService.isAuthenticated(token)
         });
     }
 }
+const isAdmin=async(req,res)=>{
+    try{
+        const response=await userService.isAdmin(req.body.id);
+        res.status(200).json({
+            data:response,
+            err:{},
+            success:true,
+            message:'successfully fetched if user is admin or not'
+        })
+ 
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: 'Not a admin',
+            err: error
+        });
+    }
+
+}
 module.exports = {
     create,
     destroy,
-    getOne,signIn,isAuthenticated
+    getOne,signIn,
+    isAuthenticated,
+    isAdmin
 };
